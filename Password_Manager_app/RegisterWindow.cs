@@ -45,6 +45,10 @@ namespace Password_Manager_app
                     MessageBox.Show(exc.Message);
                 }
             }
+            else
+            {
+                MessageBox.Show("password doesnt match or some of the fields are empty");
+            }
         }
 
         public void register(string username, string password)
@@ -53,14 +57,21 @@ namespace Password_Manager_app
             while (sr.Peek() > 0)
             {
                 if (sr.ReadLine() == username)
+                {
+                    sr.Close();
                     throw new Exception($"Username - { username } already exists!");
+                }
             }
             sr.Close();
             StreamWriter sw = new StreamWriter(@"C:\Users\Domantas\Desktop\New folder\UsersDataBase.txt", true);
             sw.WriteLine(username);
             sw.WriteLine(encryption.HashPassword(password));
             sw.Close();
-            File.Create($@"C:\Users\Domantas\Desktop\New folder\UserFiles\{username}File.txt");
+            FileStream fs = File.Create($@"C:\Users\Domantas\Desktop\New folder\UserFiles\{username}File.txt");
+            fs.Close();
+            encryption.FileEncrypt($@"C:\Users\Domantas\Desktop\New folder\UserFiles\{username}File.txt", "123");
+            File.Delete($@"C:\Users\Domantas\Desktop\New folder\UserFiles\{username}File.txt");
+
         }
         
 

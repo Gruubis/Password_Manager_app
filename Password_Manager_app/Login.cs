@@ -13,22 +13,20 @@ namespace Password_Manager_app
         public bool loginUser(string username, string password)
         {
             string[] lines = File.ReadAllLines(@"C:\Users\Domantas\Desktop\New folder\UsersDataBase.txt");
-            IEnumerable<string> usernames = lines.Where(line => line.Contains(username));
-            IEnumerable<string> hashes = lines.Where(line => line.Contains(":"));
-            if (usernames.Count() != 0) {
-                foreach (string hash in hashes)
-                {
-                    if (encryption.ValidatePassword(password, hash)){
+
+            if (lines.Contains(username)) {
+              int hash = Array.IndexOf(lines, username) +1;
+                    if (encryption.ValidatePassword(password, lines[hash]))
                         return true;
-                    }
-                }
+                    else
+                        return false;
+               
             }
             else
-            {
+            { 
                 return false;
             }
-           
-            return true;
+
         }
     }
 }
