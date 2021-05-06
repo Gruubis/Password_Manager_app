@@ -91,7 +91,13 @@ namespace Password_Manager_app
                 line = e.RowIndex;
                 OptionWindow ow = new OptionWindow();
                 ow.ShowDialog();
-            } 
+            }
+            else
+            {
+                Clipboard.SetText(dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString());
+                MessageBox.Show("Copied to Clipboard");
+
+            }
         }
 
 

@@ -25,8 +25,8 @@ namespace Password_Manager_app
         public Form1()
         {
             InitializeComponent();
-/*            encryption.FileDecrypt(aesFile, txtFile, password);
-            File.Delete(aesFile);*/
+            encryption.FileDecrypt(aesFile, txtFile, password);
+            File.Delete(aesFile);
         }
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -35,7 +35,7 @@ namespace Password_Manager_app
 
 
         }
-
+       
 
 
         private void button1_Click(object sender, EventArgs e)
